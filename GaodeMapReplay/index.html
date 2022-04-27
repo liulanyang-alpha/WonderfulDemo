@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两步路数据生成视频</title>
+
+    <script type="text/javascript">
+        window._AMapSecurityConfig = {
+            securityJsCode: '',
+        }
+    </script>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key="></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"> </script>
+
+    <style>
+        html,
+        body,
+        #app {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+        }
+
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+
+        #asset {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #asset .image {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 94%;
+            max-height: 94%;
+            position: relative;
+        }
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .5s;
+        }
+
+        /* .fade-leave-active below version 2.1.8 */
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <transition name="fade">
+            <asset id="asset" name="asset" v-if="showImage > 0">
+                <img class="image" :src="showImagePath" v-if="showImage==1">
+                <video class="image" type="video/mp4" autoplay @ended="videoEnded" :src="showImagePath" v-if="showImage==2"></video>
+            </asset>
+        </transition>
+
+        <div id="container"></div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
